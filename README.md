@@ -23,7 +23,7 @@ Usando brModelo<br>
 
 ## 3° Modelo Lógico
 
-
+![Log_Mother_Base_Current](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/abeaac4e-b10a-4f51-9824-99de1514912a)
 
 ## 4°
 
