@@ -19,7 +19,6 @@ uma missão. As unidades desenvolvem projetos e possuem recursos.
 ## 2° Modelo Conceitual
 
 ![Print Mother_Base](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/a3a50d5d-61e8-4260-ad22-5bb7ca09e541)
-Usando brModelo<br>
 
 ## 3° Modelo Lógico
 
