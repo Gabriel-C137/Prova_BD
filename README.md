@@ -26,7 +26,7 @@ uma missão. As unidades desenvolvem projetos e possuem recursos.
 
 ## 4° Modelagem Física 
 
-```
+```sql
 CREATE DATABASE Mother_Base;
 USE Mother_Base;
 
