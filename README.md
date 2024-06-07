@@ -545,6 +545,141 @@ INSERT INTO faz2 (fk_unidades_id_unidade, fk_projetos_id_projeto) VALUES (19, 19
 INSERT INTO faz2 (fk_unidades_id_unidade, fk_projetos_id_projeto) VALUES (20, 20);
 ```
 
-## 6°
+## 6° CRUD na Prática
+
+### C - Create (Insert)  | Criar (Inserir)
+### R - Read (Select)    | Ler (Selecionar)
+### U - Update           | Atualizar
+### D - Delete           | Excluir
+
+#### Vamos começar vendo uma tabela: 
+
+```sql
+SELECT * FROM soldados;
+```
+![Captura de tela 2024-06-07 004153](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/b336a738-7eb5-45fe-b9bf-4810573489c3)
+
+<hr>
+
+#### C - Create (Insert) - Vou inserir uma linha nessa tabela:
+
+```sql
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) 
+	VALUES ('Soldado russo', 'Interprete', 'Russia', 'Active', 32, '2024-06-06', 1);
+```
+
+Para ver a tabela novamente é só rodar a função novamente - ``` SELECT * FROM soldados; ```
+<br>
+![Captura de tela 2024-06-07 004939](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/ebb04b82-f77d-4621-b9fb-2997cf6221d1)
+
+#### Você também pode inserir dessa forma: 
+
+```sql
+INSERT INTO soldados
+	VALUES ('Soldado Novo', 'Recruta', 'Brazil', 'Active', 22, '2024-06-07', 5);
+```
+![Captura de tela 2024-06-07 010325](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/4bb428cf-6869-4283-900e-ade97b74ec00)
+
+<hr>
+
+#### R - Read (Select)
+
+#### Mostrando todos os dados dessa tabela:
+
+```sql
+SELECT * FROM boss;
+```
+![Captura de tela 2024-06-07 005313](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/863cafab-5f3c-45a4-b41e-e803dac6039a)
+
+
+#### Posso puxei duas colunas de dados:
+
+```sql
+SELECT id_boss, nome FROM boss;
+```
+![Captura de tela 2024-06-07 005404](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/87d80d82-ba73-489b-87f9-feb522b1f72c)
+
+
+#### Agora puxei apenas três colunas de dados:
+
+```sql
+SELECT nome, data , fk_localizacao_id_localizacao FROM missao;
+```
+![Captura de tela 2024-06-07 005515](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/0ba103b4-1cfa-4e5b-97b8-b0692f8e2aba)
+
+<hr>
+
+#### U - Update 
+
+#### Nessa etapa utilizamos essa função para atulizar dados, Utilizando:
+
+```sql
+UPDATE soldados SET nome = 'New soldier' WHERE nome = 'Soldado Novo'
+```
+Antes:<br>
+![Captura de tela 2024-06-07 015214](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/ecc51dba-d94b-4cc2-930e-868d87d61748)
+
+Depois da atualização:<br>
+![Captura de tela 2024-06-07 010632](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/c89b958c-1e23-4aed-aa87-ee1871a4eb88)
+
+
+
+#### Atualizar até mesmo um campo especifico:
+
+```sql
+UPDATE soldados SET cargo = 'Sniper' WHERE cargo = 'Interprete' ; 
+```
+Transforme os cargo de Interpretes em Snipers <br>
+Antes:<br>
+![Captura de tela 2024-06-07 010325](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/8970d428-3dc8-436f-8df0-fe874ac44105)
+
+Depois da atualização:<br>
+![Captura de tela 2024-06-07 011044](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/0bb1fd76-1455-4a45-90af-52a9ae08f046)
+
+<hr>
+
+#### D - Delete
+
+#### O simples e clássico, deletar 
+#### Aqui deletamos dados de uma tabela ou até mesmo uma tabela inteira
+
+```sql
+DELETE FROM soldados WHERE id_soldado = 21;
+```
+
+Tabela Cheia, antes: <br>
+![Captura de tela 2024-06-07 004939](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/bf7f9630-f6a8-4934-9bc1-1e2a95677535)
+
+Tabela pós o Delete, id_soldado deletado é o 21: <br>
+![Captura de tela 2024-06-07 011228](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/1f5a027e-8fbb-453b-8ec0-07e02a14522f)
+
+#### Deletaremos mais um:
+
+```sql
+DELETE FROM soldados WHERE nome = 'New soldier';
+```
+![Captura de tela 2024-06-07 011405](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/6b1a9c9a-5f72-4df2-9eda-fe56096104b0)
+
+obs: Cuidado com o ```DELETE * FROM soldados``` !!!
+<hr>
 
 ## 7°
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
