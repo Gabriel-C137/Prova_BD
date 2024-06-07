@@ -26,11 +26,17 @@ uma missão. As unidades desenvolvem projetos e possuem recursos.
 
 ## 4° Modelagem Física 
 
+#### Criando o banco de dados:
+
 ```sql
 CREATE DATABASE Mother_base;
 
 USE Mother_base;
+```
 
+#### Criando as tabelas das entidades:
+
+```sql
 CREATE TABLE titulo (
     id_titulo		INT				PRIMARY KEY		identity,
     titulo			VARCHAR(100)	NOT NULL
@@ -127,7 +133,11 @@ CREATE TABLE missao (
     FOREIGN KEY (fk_pedido_id_pedido) REFERENCES pedido(id_pedido)
 );
 
+```
 
+#### Criando as tabelas das relações:
+
+```sql
 
 CREATE TABLE pertenca (
     fk_soldados_id_soldado INT,
@@ -170,7 +180,9 @@ CREATE TABLE faz2 (
 );
 ```
 
-## 5°
+## 5° Inserção de dados
+
+### Inserindo 20 dados distintos dentro de cada tabelas:
 
 ```sql
 INSERT INTO titulo VALUES ('Commander');
