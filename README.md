@@ -27,10 +27,14 @@ uma missão. As unidades desenvolvem projetos e possuem recursos.
 ## 4° Modelagem Física 
 
 ```sql
-CREATE DATABASE MotherBase;
-USE Mother_Base;
+CREATE DATABASE Mother_base;
 
+USE Mother_base;
 
+CREATE TABLE titulo (
+    id_titulo		INT				PRIMARY KEY		identity,
+    titulo			VARCHAR(100)	NOT NULL
+);
 
 CREATE TABLE boss (
     id_boss								INT				primary key		identity,
@@ -40,9 +44,9 @@ CREATE TABLE boss (
     FOREIGN KEY (fk_titulo_titulo_pk) REFERENCES titulo(id_titulo)
 );
 
-CREATE TABLE titulo (
-    id_titulo		INT				PRIMARY KEY		identity,
-    titulo			VARCHAR(100)	NOT NULL
+CREATE TABLE habilidade (
+    id_habilidade		INT				PRIMARY KEY			identity,
+    habilidade			VARCHAR(1000)	NOT NULL
 );
 
 CREATE TABLE soldados (
@@ -57,10 +61,6 @@ CREATE TABLE soldados (
     FOREIGN KEY (fk_habilidade_habilidade_pk) REFERENCES habilidade(id_habilidade)
 );
 
-CREATE TABLE habilidade (
-    id_habilidade		INT				PRIMARY KEY			identity,
-    habilidade			VARCHAR(1000)	NOT NULL
-);
 
 CREATE TABLE unidades (
     id_unidade				INT					PRIMARY KEY			identity,
@@ -86,21 +86,21 @@ CREATE TABLE projetos (
     FOREIGN KEY (fk_unidades_id_unidade) REFERENCES unidades(id_unidade)
 );
 
-CREATE TABLE missao (
-    id_missao						INT				PRIMARY KEY			identity,
-    nome							VARCHAR(100)	NOT NULL,
-    data							DATE			NOT NULL,
-    status							VARCHAR(100)	NOT NULL,
-    fk_localizacao_id_localizacao	INT,
-    fk_pedido_id_pedido				INT,
-
-    FOREIGN KEY (fk_localizacao_id_localizacao) REFERENCES localizacao(id_localizacao),
-    FOREIGN KEY (fk_pedido_id_pedido) REFERENCES pedido(id_pedido)
-);
-
 CREATE TABLE localizacao (
     id_localizacao			INT				PRIMARY KEY			identity,
     localizacao				VARCHAR(100)	NOT NULL
+);
+
+CREATE TABLE contato (
+    id_contato		INT				PRIMARY KEY			identity,
+    contato			VARCHAR(100)	NOT NULL
+);
+
+CREATE TABLE cliente (
+    id_cliente				INT				PRIMARY KEY			identity,
+    nome					VARCHAR(100)	NOT NULL,
+    fk_contato_id_contato	INT,
+    FOREIGN KEY (fk_contato_id_contato) REFERENCES contato(id_contato)
 );
 
 CREATE TABLE pedido (
@@ -113,17 +113,20 @@ CREATE TABLE pedido (
     FOREIGN KEY (fk_cliente_id_cliente) REFERENCES cliente(id_cliente)
 );
 
-CREATE TABLE cliente (
-    id_cliente				INT				PRIMARY KEY			identity,
-    nome					VARCHAR(100)	NOT NULL,
-    fk_contato_id_contato	INT,
-    FOREIGN KEY (fk_contato_id_contato) REFERENCES contato(id_contato)
+
+
+CREATE TABLE missao (
+    id_missao						INT				PRIMARY KEY			identity,
+    nome							VARCHAR(100)	NOT NULL,
+    data							DATE			NOT NULL,
+    status							VARCHAR(100)	NOT NULL,
+    fk_localizacao_id_localizacao	INT,
+    fk_pedido_id_pedido				INT,
+
+    FOREIGN KEY (fk_localizacao_id_localizacao) REFERENCES localizacao(id_localizacao),
+    FOREIGN KEY (fk_pedido_id_pedido) REFERENCES pedido(id_pedido)
 );
 
-CREATE TABLE contato (
-    id_contato		INT				PRIMARY KEY			identity,
-    contato			VARCHAR(100)	NOT NULL
-);
 
 
 CREATE TABLE pertenca (
@@ -170,7 +173,6 @@ CREATE TABLE faz2 (
 ## 5°
 
 ```sql
-
 INSERT INTO titulo VALUES ('Commander');
 INSERT INTO titulo VALUES ('General');
 INSERT INTO titulo VALUES ('Lieutenant');
@@ -213,27 +215,6 @@ INSERT INTO boss (nome, fk_titulo_titulo_pk) VALUES ('The End', 18);
 INSERT INTO boss (nome, fk_titulo_titulo_pk) VALUES ('The Fury', 19);
 INSERT INTO boss (nome, fk_titulo_titulo_pk) VALUES ('Paramedic', 20);
 
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 1', 'Sniper', 'USA', 'Active', 25, '2023-01-01', 1);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 2', 'Medic', 'Canada', 'Active', 30, '2023-02-01', 2);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 3', 'Engineer', 'UK', 'Active', 28, '2023-03-01', 3);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 4', 'Infantry', 'France', 'Active', 26, '2023-04-01', 4);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 5', 'Scout', 'Germany', 'Active', 27, '2023-05-01', 5);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 6', 'Driver', 'USA', 'Active', 29, '2023-06-01', 6);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 7', 'Gunner', 'Canada', 'Active', 31, '2023-07-01', 7);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 8', 'Pilot', 'UK', 'Active', 32, '2023-08-01', 8);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 9', 'Demolitions', 'France', 'Active', 33, '2023-09-01', 9);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 10', 'Logistics', 'Germany', 'Active', 34, '2023-10-01', 10);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 11', 'Commando', 'USA', 'Active', 35, '2023-11-01', 11);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 12', 'Spy', 'Canada', 'Active', 36, '2023-12-01', 12);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 13', 'Recon', 'UK', 'Active', 37, '2024-01-01', 13);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 14', 'Heavy Weapons', 'France', 'Active', 38, '2024-02-01', 14);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 15', 'Cyber Warfare', 'Germany', 'Active', 39, '2024-03-01', 15);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 16', 'Chemical Warfare', 'USA', 'Active', 40, '2024-04-01', 16);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 17', 'Sniper', 'Canada', 'Active', 41, '2024-05-01', 17);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 18', 'Medic', 'UK', 'Active', 42, '2024-06-01', 18);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 19', 'Engineer', 'France', 'Active', 43, '2024-07-01', 19);
-INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 20', 'Infantry', 'Germany', 'Active', 44, '2024-08-01', 20);
-
 INSERT INTO habilidade (habilidade) VALUES ('Marksmanship');
 INSERT INTO habilidade (habilidade) VALUES ('Medical Expertise');
 INSERT INTO habilidade (habilidade) VALUES ('Engineering');
@@ -254,6 +235,27 @@ INSERT INTO habilidade (habilidade) VALUES ('Marksmanship');
 INSERT INTO habilidade (habilidade) VALUES ('Medical Expertise');
 INSERT INTO habilidade (habilidade) VALUES ('Engineering');
 INSERT INTO habilidade (habilidade) VALUES ('Infantry Tactics');
+
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 1', 'Sniper', 'USA', 'Active', 25, '2023-01-01', 1);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 2', 'Medic', 'Canada', 'Active', 30, '2023-02-01', 2);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 3', 'Engineer', 'UK', 'Active', 28, '2023-03-01', 3);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 4', 'Infantry', 'France', 'Active', 26, '2023-04-01', 4);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 5', 'Scout', 'Germany', 'Active', 27, '2023-05-01', 5);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 6', 'Driver', 'USA', 'Active', 29, '2023-06-01', 6);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 7', 'Gunner', 'Canada', 'Active', 31, '2023-07-01', 7);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 8', 'Pilot', 'UK', 'Active', 32, '2023-08-01', 8);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 9', 'Demolitions', 'France', 'Active', 33, '2023-09-01', 9);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 10', 'Logistics', 'Germany', 'Active', 34, '2023-10-01', 10);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 11', 'Commando', 'USA', 'Active', 35, '2023-11-01', 11);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 12', 'Spy', 'Canada', 'Active', 36, '2023-12-01', 12);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 13', 'Recon', 'UK', 'Active', 37, '2024-01-01', 13);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 14', 'Heavy Weapons', 'France', 'Active', 38, '2024-02-01', 14);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 15', 'Cyber Warfare', 'Germany', 'Active', 39, '2024-03-01', 15);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 16', 'Chemical Warfare', 'USA', 'Active', 40, '2024-04-01', 16);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 17', 'Sniper', 'Canada', 'Active', 41, '2024-05-01', 17);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 18', 'Medic', 'UK', 'Active', 42, '2024-06-01', 18);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 19', 'Engineer', 'France', 'Active', 43, '2024-07-01', 19);
+INSERT INTO soldados (nome, cargo, pais, status, idade, data, fk_habilidade_habilidade_pk) VALUES ('Soldado 20', 'Infantry', 'Germany', 'Active', 44, '2024-08-01', 20);
 
 INSERT INTO unidades (nome, tipo, fk_boss_id_boss) VALUES ('Combat Unit', 'Combat', 1);
 INSERT INTO unidades (nome, tipo, fk_boss_id_boss) VALUES ('Medical Unit', 'Support', 2);
@@ -318,27 +320,6 @@ INSERT INTO projetos (nome, descricao, status, fk_unidades_id_unidade) VALUES ('
 INSERT INTO projetos (nome, descricao, status, fk_unidades_id_unidade) VALUES ('Project Sierra', 'Improve special forces tactics', 'Completed', 19);
 INSERT INTO projetos (nome, descricao, status, fk_unidades_id_unidade) VALUES ('Project Tango', 'Develop new logistics software', 'In Progress', 20);
 
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Nightfall', '2024-01-01', 'Completed', 1, 1);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Dawn', '2024-02-01', 'In Progress', 2, 2);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Sunset', '2024-03-01', 'Not Started', 3, 3);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Eclipse', '2024-04-01', 'Completed', 4, 4);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Midnight', '2024-05-01', 'In Progress', 5, 5);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Twilight', '2024-06-01', 'Not Started', 6, 6);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Dusk', '2024-07-01', 'Completed', 7, 7);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Zenith', '2024-08-01', 'In Progress', 8, 8);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Horizon', '2024-09-01', 'Not Started', 9, 9);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Daybreak', '2024-10-01', 'Completed', 10, 10);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Starlight', '2024-11-01', 'In Progress', 11, 11);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Moonbeam', '2024-12-01', 'Not Started', 12, 12);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation New Dawn', '2025-01-01', 'Completed', 13, 13);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Ember', '2025-02-01', 'In Progress', 14, 14);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Inferno', '2025-03-01', 'Not Started', 15, 15);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Flame', '2025-04-01', 'Completed', 16, 16);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Blaze', '2025-05-01', 'In Progress', 17, 17);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Radiance', '2025-06-01', 'Not Started', 18, 18);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Shimmer', '2025-07-01', 'Completed', 19, 19);
-INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Glow', '2025-08-01', 'In Progress', 20, 20);
-
 INSERT INTO localizacao (localizacao) VALUES ('Afghanistan');
 INSERT INTO localizacao (localizacao) VALUES ('Africa');
 INSERT INTO localizacao (localizacao) VALUES ('Central America');
@@ -359,48 +340,6 @@ INSERT INTO localizacao (localizacao) VALUES ('Atlantic Ocean');
 INSERT INTO localizacao (localizacao) VALUES ('Sahara Desert');
 INSERT INTO localizacao (localizacao) VALUES ('Amazon Rainforest');
 INSERT INTO localizacao (localizacao) VALUES ('Himalayas');
-
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-01-01', 'Supply drop', 'Completed', 1);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-02-01', 'Recon mission', 'In Progress', 2);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-03-01', 'Base construction', 'Not Started', 3);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-04-01', 'Intel gathering', 'Completed', 4);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-05-01', 'Equipment upgrade', 'In Progress', 5);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-06-01', 'Training program', 'Not Started', 6);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-07-01', 'Medical supplies', 'Completed', 7);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-08-01', 'Vehicle maintenance', 'In Progress', 8);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-09-01', 'Weapon testing', 'Not Started', 9);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-10-01', 'Security upgrade', 'Completed', 10);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-11-01', 'Base expansion', 'In Progress', 11);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-12-01', 'Communication setup', 'Not Started', 12);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-01-01', 'Surveillance mission', 'Completed', 13);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-02-01', 'Supply convoy', 'In Progress', 14);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-03-01', 'Cyber security', 'Not Started', 15);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-04-01', 'Chemical testing', 'Completed', 16);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-05-01', 'Combat simulation', 'In Progress', 17);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-06-01', 'Demolition operation', 'Not Started', 18);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-07-01', 'Recon mission', 'Completed', 19);
-INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-08-01', 'Medical aid', 'In Progress', 20);
-
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 1', 1);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 2', 2);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 3', 3);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 4', 4);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 5', 5);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 6', 6);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 7', 7);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 8', 8);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 9', 9);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 10', 10);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 11', 11);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 12', 12);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 13', 13);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 14', 14);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 15', 15);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 16', 16);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 17', 17);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 18', 18);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 19', 19);
-INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 20', 20);
 
 INSERT INTO contato (contato) VALUES ('contact1@example.com');
 INSERT INTO contato (contato) VALUES ('contact2@example.com');
@@ -423,6 +362,70 @@ INSERT INTO contato (contato) VALUES ('contact18@example.com');
 INSERT INTO contato (contato) VALUES ('contact19@example.com');
 INSERT INTO contato (contato) VALUES ('contact20@example.com');
 
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 1', 1);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 2', 2);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 3', 3);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 4', 4);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 5', 5);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 6', 6);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 7', 7);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 8', 8);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 9', 9);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 10', 10);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 11', 11);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 12', 12);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 13', 13);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 14', 14);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 15', 15);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 16', 16);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 17', 17);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 18', 18);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 19', 19);
+INSERT INTO cliente (nome, fk_contato_id_contato) VALUES ('Cliente 20', 20);
+
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-01-01', 'Supply drop', 'Completed', 1);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-02-01', 'Recon mission', 'In Progress', 2);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-03-01', 'Base construction', 'Not Started', 3);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-04-01', 'Intel gathering', 'Completed', 4);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-05-01', 'Equipment upgrade', 'In Progress', 5);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-06-01', 'Training program', 'Not Started', 6);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-07-01', 'Medical supplies', 'Completed', 7);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-08-01', 'Vehicle maintenance', 'In Progress', 8);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-09-01', 'Weapon testing', 'Not Started', 9);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-10-01', 'Security upgrade', 'Completed', 10);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-11-01', 'Base expansion', 'In Progress', 11);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2023-12-01', 'Communication setup', 'Not Started', 12);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-01-01', 'Surveillance mission', 'Completed', 13);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-02-01', 'Supply convoy', 'In Progress', 14);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-03-01', 'Cyber security', 'Not Started', 15);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-04-01', 'Chemical testing', 'Completed', 16);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-05-01', 'Combat simulation', 'In Progress', 17);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-06-01', 'Demolition operation', 'Not Started', 18);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-07-01', 'Recon mission', 'Completed', 19);
+INSERT INTO pedido (data, descricao, status, fk_cliente_id_cliente) VALUES ('2024-08-01', 'Medical aid', 'In Progress', 20);
+
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Nightfall', '2024-01-01', 'Completed', 1, 1);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Dawn', '2024-02-01', 'In Progress', 2, 2);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Sunset', '2024-03-01', 'Not Started', 3, 3);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Eclipse', '2024-04-01', 'Completed', 4, 4);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Midnight', '2024-05-01', 'In Progress', 5, 5);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Twilight', '2024-06-01', 'Not Started', 6, 6);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Dusk', '2024-07-01', 'Completed', 7, 7);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Zenith', '2024-08-01', 'In Progress', 8, 8);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Horizon', '2024-09-01', 'Not Started', 9, 9);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Daybreak', '2024-10-01', 'Completed', 10, 10);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Starlight', '2024-11-01', 'In Progress', 11, 11);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Moonbeam', '2024-12-01', 'Not Started', 12, 12);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation New Dawn', '2025-01-01', 'Completed', 13, 13);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Ember', '2025-02-01', 'In Progress', 14, 14);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Inferno', '2025-03-01', 'Not Started', 15, 15);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Flame', '2025-04-01', 'Completed', 16, 16);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Blaze', '2025-05-01', 'In Progress', 17, 17);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Radiance', '2025-06-01', 'Not Started', 18, 18);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Shimmer', '2025-07-01', 'Completed', 19, 19);
+INSERT INTO missao (nome, data, status, fk_localizacao_id_localizacao, fk_pedido_id_pedido) VALUES ('Operation Glow', '2025-08-01', 'In Progress', 20, 20);
+
+-- RELAÇÕES
 
 INSERT INTO pertenca (fk_soldados_id_soldado, fk_unidades_id_unidade) VALUES (1, 1);
 INSERT INTO pertenca (fk_soldados_id_soldado, fk_unidades_id_unidade) VALUES (2, 2);
@@ -528,7 +531,6 @@ INSERT INTO faz2 (fk_unidades_id_unidade, fk_projetos_id_projeto) VALUES (17, 17
 INSERT INTO faz2 (fk_unidades_id_unidade, fk_projetos_id_projeto) VALUES (18, 18);
 INSERT INTO faz2 (fk_unidades_id_unidade, fk_projetos_id_projeto) VALUES (19, 19);
 INSERT INTO faz2 (fk_unidades_id_unidade, fk_projetos_id_projeto) VALUES (20, 20);
-
 ```
 
 ## 6°
