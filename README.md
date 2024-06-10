@@ -663,23 +663,76 @@ DELETE FROM soldados WHERE nome = 'New soldier';
 obs: Cuidado com o ```DELETE * FROM soldados``` !!!
 <hr>
 
-## 7°
+## 7° Seleção, Filtro e Ordenação
 
 
+```sql
+SELECT * FROM recursos WHERE quantidade <= 500;
+```
+![Captura de tela 2024-06-10 200045](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/2fcaac20-18e9-4c56-8da4-9eb2a2c47b13)
 
 
+```sql
+SELECT * FROM recursos WHERE tipo like 'E%';
+```
+![Captura de tela 2024-06-10 200325](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/ea24de50-cd27-41be-a02a-199c181e82e6)
 
 
+```sql
+SELECT * FROM boss WHERE nome like 'B%';
+```
+![Captura de tela 2024-06-10 200212](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/e7e76ef3-4568-4fe7-94fa-bf6a50a10f03)
 
 
+```sql
+SELECT * FROM recursos WHERE quantidade between 150 and 5000;
+```
+![Captura de tela 2024-06-10 200437](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/285b08e8-bb33-4919-a31c-a4b5a591987a)
 
 
+```sql
+SELECT * FROM boss WHERE fk_titulo_titulo_pk between 15 and 19;
+```
+![Captura de tela 2024-06-10 200742](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/3cd91802-efbb-4498-8292-8b0253ff4c8a)
 
 
+```sql
+SELECT * FROM boss WHERE id_boss not in (15, 16, 17, 18, 19 ,20);
+```
+![Captura de tela 2024-06-10 200902](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/59c26347-107e-4e62-a256-6eb77c2fe7c3)
 
 
+```sql
+SELECT * FROM recursos order by tipo; 
+```
+![Captura de tela 2024-06-10 201040](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/ab5b8f32-d63f-4b25-8c72-f570a6ba547c)
 
 
+```sql
+SELECT * FROM soldados
+WHERE pais in ('USA', 'Canada')
+	order by cargo;
+```
+![Captura de tela 2024-06-10 201237](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/c648b298-0104-4491-aead-30441f99ca39)
 
+
+```sql
+SELECT * FROM soldados order by cargo asc;
+```
+![Captura de tela 2024-06-10 201353](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/eba990be-5346-42d6-901e-c2b19f991b8f)
+
+
+```sql
+SELECT * FROM soldados order by cargo desc;
+```
+![Captura de tela 2024-06-10 201429](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/04dcb621-b407-45f6-a366-04fde6188d9b)
+
+
+```sql
+SELECT * FROM soldados
+WHERE pais in ('UK', 'France')
+	order by idade;
+```
+![Captura de tela 2024-06-10 201725](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/bb64944b-5a27-40c1-9c71-cbb5c8be15c5)
 
 
