@@ -4,10 +4,9 @@
 <div align=center >Cenário criado baseado em Metal Gear Solid 5: Phantom Pain</div>
 <br>
 <br>
-Mother Base instalação do jogo: 
-
-![Mother_Base_IMG](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/71dd42a7-7b91-4316-b21a-b021114b4e68)
-
+<div align=center >Mother Base</div>
+<br>
+<br>
 
 ## 1° Cenário 
 
