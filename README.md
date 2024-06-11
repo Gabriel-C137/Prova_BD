@@ -736,3 +736,28 @@ WHERE pais in ('UK', 'France')
 ![Captura de tela 2024-06-10 201725](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/bb64944b-5a27-40c1-9c71-cbb5c8be15c5)
 
 
+```sql
+SELECT nome, idade, fk_habilidade_habilidade_pk
+FROM soldados
+JOIN habilidade 
+ON soldados.fk_habilidade_habilidade_pk = habilidade.id_habilidade;
+```
+![Captura de tela 2024-06-10 205248](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/d46f9d28-d4f3-4448-8efc-e149a6984a8b)
+
+
+```sql
+SELECT tipo, id_boss, boss.nome
+FROM unidades
+LEFT JOIN boss
+ON unidades.fk_boss_id_boss = boss.id_boss;
+```
+![Captura de tela 2024-06-10 210304](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/89271167-a14c-4eff-884e-bd23c8dc74fd)
+
+
+```sql
+SELECT fk_pedido_id_pedido, faz.fk_cliente_id_cliente, pedido.descricao
+FROM faz
+JOIN pedido
+ON faz.fk_pedido_id_pedido = pedido.id_pedido;
+```
+![Captura de tela 2024-06-10 211010](https://github.com/Gabriel-C137/Prova_BD/assets/91295561/38521e34-456b-469d-9c53-35c745e63177)
