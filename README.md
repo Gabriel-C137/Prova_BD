@@ -181,7 +181,7 @@ CREATE TABLE faz2 (
 
 ## 5° Inserção de dados
 
-### Inserindo 20 dados distintos dentro de cada tabelas:
+### Inserindo 20 dados distintos dentro de cada tabela:
 
 ```sql
 INSERT INTO titulo VALUES ('Commander');
